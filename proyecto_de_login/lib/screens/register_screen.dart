@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:proyecto_de_login/providers/login_form_provider.dart';
 import 'package:proyecto_de_login/widgets/widgets.dart';
 
 // ignore: use_key_in_widget_constructors
-class LoginScreen extends StatelessWidget {
+class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,38 +13,33 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           // ignore: prefer_const_literals_to_create_immutables
           children: [
+            // ignore: prefer_const_constructors
             SizedBox(height: 250),
             CardContainer(
                 child: Column(
               // ignore: prefer_const_literals_to_create_immutables
               children: [
+                // ignore: prefer_const_constructors
                 SizedBox(
                   height: 10,
                 ),
+                // ignore: prefer_const_constructors
                 SizedBox(height: 10),
                 Text(
-                  'Login',
+                  'Registrar usuario',
                   style: Theme.of(context).textTheme.headline4,
                 ),
+                // ignore: prefer_const_constructors
                 SizedBox(
                   height: 30,
                 ),
                 ChangeNotifierProvider(
-                    create: (_) => LoginFormProvider(), child: InputLogin())
+                    // ignore: prefer_const_constructors
+                    create: (_) => LoginFormProvider(),
+                    // ignore: prefer_const_constructors
+                    child: InputForm())
               ],
-            )),
-            TextButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, 'registerScreen');
-                },
-                style: ButtonStyle(
-                    overlayColor:
-                        MaterialStateProperty.all(Colors.blue.withOpacity(0.1)),
-                    shape: MaterialStateProperty.all(StadiumBorder())),
-                child: Text(
-                  'Crear cuenta nueva',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ))
+            ))
           ],
         ),
       )),
@@ -54,14 +47,14 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-class InputLogin extends StatefulWidget {
-  const InputLogin({Key? key}) : super(key: key);
+class InputForm extends StatefulWidget {
+  const InputForm({Key? key}) : super(key: key);
 
   @override
-  _InputLoginState createState() => _InputLoginState();
+  _InputFormState createState() => _InputFormState();
 }
 
-class _InputLoginState extends State<InputLogin> {
+class _InputFormState extends State<InputForm> {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
@@ -72,15 +65,18 @@ class _InputLoginState extends State<InputLogin> {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         child: Column(
           children: [
-            _InputCorreo(),
+            _InputCorreoForm(),
+            // ignore: prefer_const_constructors
             SizedBox(
               height: 30,
             ),
-            InputContrasena(),
+            InputContrasenaForm(),
+            // ignore: prefer_const_constructors
             SizedBox(
               height: 30,
             ),
-            BottonIngresar()
+            // ignore: prefer_const_constructors
+            BotonRegistrar()
           ],
         ),
       ),
@@ -88,8 +84,8 @@ class _InputLoginState extends State<InputLogin> {
   }
 }
 
-class BottonIngresar extends StatelessWidget {
-  const BottonIngresar({
+class BotonRegistrar extends StatelessWidget {
+  const BotonRegistrar({
     Key? key,
   }) : super(key: key);
 
@@ -102,6 +98,7 @@ class BottonIngresar extends StatelessWidget {
         elevation: 0,
         color: Colors.deepPurple,
         child: Container(
+          // ignore: prefer_const_constructors
           padding: EdgeInsets.symmetric(horizontal: 70, vertical: 15),
           child: Text(loginForm.isLoading ? 'Espere' : 'Ingresar'),
         ),
@@ -114,6 +111,7 @@ class BottonIngresar extends StatelessWidget {
                   if (loginForm.email == 'javierjuarez.jj28@gmail.com' &&
                       loginForm.password == 'Jogabonito20') {
                     loginForm.isLoading = true;
+                    // ignore: prefer_const_constructors
                     await Future.delayed(Duration(seconds: 2));
                     Navigator.pushReplacementNamed(context, 'homeScreen');
                   }
@@ -123,7 +121,7 @@ class BottonIngresar extends StatelessWidget {
 }
 
 // ignore: use_key_in_widget_constructors
-class InputContrasena extends StatelessWidget {
+class InputContrasenaForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
@@ -133,6 +131,7 @@ class InputContrasena extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
         hintText: "Introduce tu contraseña",
         labelText: "Password",
+        // ignore: prefer_const_constructors
         icon: Icon(
           Icons.lock_outline,
           color: Colors.purple,
@@ -152,7 +151,7 @@ class InputContrasena extends StatelessWidget {
   }
 }
 
-class _InputCorreo extends StatelessWidget {
+class _InputCorreoForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loginForm = Provider.of<LoginFormProvider>(context);
@@ -162,6 +161,7 @@ class _InputCorreo extends StatelessWidget {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
           hintText: "Correo electrónico",
           labelText: "Email",
+          // ignore: prefer_const_constructors
           icon: Icon(
             Icons.email,
             color: Colors.purple,
