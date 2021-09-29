@@ -9,7 +9,7 @@ class ProductImage extends StatelessWidget {
       padding: EdgeInsets.only(left: 10, right: 10, top: 15),
       child: Container(
         width: double.infinity,
-        height: 450,
+        height: 350,
         decoration: _buildBoxDecoration(),
         child: FadeInImage(
           placeholder: AssetImage('lib/assets/jar-loading.gif'),
@@ -21,7 +21,6 @@ class ProductImage extends StatelessWidget {
   }
 
   BoxDecoration _buildBoxDecoration() => BoxDecoration(
-          color: Colors.blue,
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(30),
             bottomRight: Radius.circular(30),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_de_login/models/product.dart';
 
 class ProductCard extends StatelessWidget {
+  final Product product;
+
+  const ProductCard({Key? key, required this.product}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -15,15 +19,23 @@ class ProductCard extends StatelessWidget {
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              _BackGroundImage(),
-              _ProductDetails(),
+              _BackGroundImage(
+                product: product,
+              ),
+              _ProductDetails(
+                product: product,
+              ),
               Positioned(
-                child: _PriceTag(),
+                child: _PriceTag(
+                  product: product,
+                ),
                 top: 0,
                 right: 0,
               ),
               Positioned(
-                child: _NotAvailable(),
+                child: _NotAvailable(
+                  product: product,
+                ),
                 top: 0,
                 left: 0,
               ),
@@ -44,7 +56,9 @@ class ProductCard extends StatelessWidget {
 }
 
 class _BackGroundImage extends StatelessWidget {
-  const _BackGroundImage({Key? key}) : super(key: key);
+  final Product product;
+
+  const _BackGroundImage({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +69,7 @@ class _BackGroundImage extends StatelessWidget {
         height: 400,
         child: FadeInImage(
           placeholder: AssetImage('lib/assets/jar-loading.gif'),
-          image: NetworkImage('https://via.placeholder.com/400x300/f6f6f6'),
+          image: NetworkImage(product.picture.toString()),
           fit: BoxFit.cover,
         ),
       ),
@@ -64,7 +78,9 @@ class _BackGroundImage extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
-  const _ProductDetails({Key? key}) : super(key: key);
+  final Product product;
+
+  const _ProductDetails({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +94,7 @@ class _ProductDetails extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Disco duro',
+                product.name,
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
@@ -87,7 +103,7 @@ class _ProductDetails extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                'ID del producto',
+                product.id.toString(),
                 style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -102,7 +118,9 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
-  const _PriceTag({Key? key}) : super(key: key);
+  final Product product;
+
+  const _PriceTag({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +129,7 @@ class _PriceTag extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.contain,
         child: Text(
-          '\$100.00',
+          '\$ ' + product.price.toString(),
           style: TextStyle(fontSize: 20, color: Colors.black),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
@@ -126,16 +144,22 @@ class _PriceTag extends StatelessWidget {
 }
 
 class _NotAvailable extends StatelessWidget {
-  const _NotAvailable({Key? key}) : super(key: key);
+  final Product product;
+
+  const _NotAvailable({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String disponible = 'No disponible';
+    if (product.available) {
+      disponible = 'Dispobible';
+    }
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: FittedBox(
         fit: BoxFit.contain,
         child: Text(
-          'Available',
+          disponible,
           style: TextStyle(fontSize: 20, color: Colors.black),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,

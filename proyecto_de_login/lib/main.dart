@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:proyecto_de_login/screens/screens.dart';
+import 'package:proyecto_de_login/services/services.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AppState());
+}
+
+// ignore: use_key_in_widget_constructors
+class AppState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ProductServices())],
+      child: MyApp(),
+    );
+  }
 }
 
 // ignore: use_key_in_widget_constructors
